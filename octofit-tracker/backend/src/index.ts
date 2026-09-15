@@ -12,10 +12,15 @@ import { apiUrl, port } from './server';
 
 const app = express();
 const mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/octofit_db';
+const codespaceName = process.env.CODESPACE_NAME;
+const allowedOrigins = [
+  process.env.FRONTEND_URL || 'http://localhost:5173',
+  ...(codespaceName ? [`https://${codespaceName}-5173.app.github.dev`] : []),
+];
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    origin: allowedOrigins,
     credentials: true,
   })
 );

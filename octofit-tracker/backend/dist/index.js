@@ -10,8 +10,13 @@ const models_1 = require("./models");
 const server_1 = require("./server");
 const app = (0, express_1.default)();
 const mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/octofit_db';
+const codespaceName = process.env.CODESPACE_NAME;
+const allowedOrigins = [
+    process.env.FRONTEND_URL || 'http://localhost:5173',
+    ...(codespaceName ? [`https://${codespaceName}-5173.app.github.dev`] : []),
+];
 app.use((0, cors_1.default)({
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    origin: allowedOrigins,
     credentials: true,
 }));
 app.use(express_1.default.json());

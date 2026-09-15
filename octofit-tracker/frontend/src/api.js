@@ -1,8 +1,15 @@
 const codespaceName = import.meta.env.VITE_CODESPACE_NAME;
+const browserHostname = typeof window === 'undefined' ? '' : window.location.hostname;
+const codespaceHost = browserHostname.replace(
+  /-\d+\.app\.github\.dev$/,
+  '-8000.app.github.dev'
+);
 
 export const API_BASE_URL = codespaceName
   ? `https://${codespaceName}-8000.app.github.dev`
-  : 'http://localhost:8000';
+  : codespaceHost !== browserHostname
+    ? `https://${codespaceHost}`
+    : 'http://localhost:8000';
 
 export async function fetchCollection(resource) {
   const response = await fetch(`${API_BASE_URL}/api/${resource}/`);
