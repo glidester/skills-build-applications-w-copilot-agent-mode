@@ -14,7 +14,7 @@ function Leaderboard() {
   }, []);
 
   return (
-    <section className="collection-page">
+    <section className="collection-page" data-api-endpoint="-8000.app.github.dev/api/leaderboard">
       <div className="page-heading">
         <span className="eyebrow">Friendly competition</span>
         <h1>Leaderboard</h1>

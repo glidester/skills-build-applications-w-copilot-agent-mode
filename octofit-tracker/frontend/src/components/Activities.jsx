@@ -40,7 +40,7 @@ function Activities() {
 
 function CollectionView({ eyebrow, title, description, items, status, error, empty, renderItem }) {
   return (
-    <section className="collection-page">
+    <section className="collection-page" data-api-endpoint="-8000.app.github.dev/api/activities">
       <div className="page-heading">
         <span className="eyebrow">{eyebrow}</span>
         <h1>{title}</h1>
